@@ -21,7 +21,8 @@ credit::credit():account() {
 
 }
 
-credit::credit(char* n, char* s, char* o, int id , double su, double per):account(n,s,o) {
+credit::credit(char* n, char* s, char* o, int id , double su, double per) {
+    Setclient(n, s, o);
 	creditnumber = id;
 	sum = su;
 	percent = per;
@@ -71,7 +72,7 @@ void credit::save_credit(credit mas[]) {
     ofstream file("Credit.txt");
     file << counter << endl;
     for (int i = 0; i < counter; i++) {
-        mas[counter].To_String(file);
+        mas[i].To_String(file);
     }
     delete[] mas;
     file.close();
@@ -94,7 +95,7 @@ void credit::load_credit(credit mas[]) {
             file >> id;
             file >> sum;
             file >> per;
-            mas[counter] = credit(n, s, o, id, sum,per);
+            mas[i] = credit(n, s, o, id, sum,per);
         }
     }
     else {
@@ -134,7 +135,7 @@ ostream& operator <<(ostream& out, credit& obj) {
     return out;
 }
 
-void sort(credit mas[]) {
+void credit::sort(credit mas[]) {
     credit test;
     for (int i = 0; i < credit::counter - 1; ++i) {
         for (int j = 0; j < credit::counter - 1; ++j) {

@@ -7,17 +7,17 @@
 class deposit: protected account 
 {
 private:
-	friend static void sort(deposit*);
 	int deposnumber;
 	double sum;
 public:
 	static int counter;
+	static void sort(deposit*);
 	deposit();
 	deposit(FIO, double, int);
 	deposit(char*, char*, char*, double, int);
-	int setdeposnumber(int);
+	void setdeposnumber(int);
 	int getdeposnumber();
-	double setsum(double);
+	void setsum(double);
 	double getsum();
 	static void add_deposit(deposit*);
 	static void save_deposit(deposit*);

@@ -6,7 +6,7 @@ int deposit::counter = 0;
 deposit::deposit():account() {
 
 	sum = 100;
-	deposnumber = 1;
+	deposnumber = 0;
 }
 
 deposit::deposit(FIO s, double su, int depos):account(s) {
@@ -16,7 +16,8 @@ deposit::deposit(FIO s, double su, int depos):account(s) {
 
 }
 
-deposit::deposit(char* n, char* s, char* o, double su, int id):account(n,s,o) {
+deposit::deposit(char* n, char* s, char* o, double su, int id) {
+    Setclient(n, s, o);
 	sum = su;
 	deposnumber = id;
 }
@@ -24,12 +25,11 @@ deposit::deposit(char* n, char* s, char* o, double su, int id):account(n,s,o) {
 int deposit::getdeposnumber() {
 	return deposnumber;
 }
-
-int deposit::setdeposnumber(int value) {
+void  deposit::setdeposnumber(int value) {
 	deposnumber = value;
 }
 
-double deposit::setsum(double value) {
+void deposit::setsum(double value) {
 	sum = value;
 }
 
@@ -69,7 +69,7 @@ void deposit::save_deposit(deposit mas[]) {
     ofstream file("Deposit.txt");
     file << counter << endl;
     for (int i = 0; i < counter; i++) {
-        mas[counter].To_String(file);
+        mas[i].To_String(file);
     }
     delete[] mas;
     file.close();
@@ -98,7 +98,7 @@ void deposit::load_deposit(deposit mas[]) {
             file >> o;
             file >> id;
             file >> sum;
-            mas[deposit::counter] = deposit(n, s, o, sum, id);
+            mas[i] = deposit(n, s, o, sum, id);
         }
     }
      else {
@@ -120,7 +120,7 @@ ostream& operator <<(ostream& out, deposit& obj) {
     return out;
 }
 
-void sort(deposit mas[]) {
+void deposit::sort(deposit mas[]) {
         deposit test;
         for (int i = 0; i < deposit::counter - 1; ++i) {
             for (int j = 0; j < deposit::counter - 1; ++j) {

@@ -18,5 +18,9 @@ public:
 	char* Getname();
 	char* Getoname();
 	virtual void To_String(ostream&);
+	void Setname(char*);
+	void Setsurname(char*);
+	void Setoname(char*);
+	void Setclient(char*, char*, char*);
 };
 

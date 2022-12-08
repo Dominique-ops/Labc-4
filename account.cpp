@@ -21,7 +21,23 @@ char* account::Getoname() {
 	return client.oname;
 }
 
+void  account::Setname(char* s) {
+	 client.name = s;
+}
 
+void account::Setsurname(char* s) {
+	 client.surname = s;
+}
+
+void account::Setoname(char* s) {
+   client.oname = s;
+}
+
+void account::Setclient(char* n, char* s, char* o) {
+	client.name = n;
+	client.surname = s;
+	client.oname = o;
+}
 void account::To_String(ostream& out) {
 	out << Getsurname() << endl;
 	out << Getname() << endl;

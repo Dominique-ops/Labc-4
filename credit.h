@@ -9,12 +9,12 @@
 class credit:protected account
 { 
 private:
-	friend static void sort(credit*);
 	int creditnumber;
 	double sum;
 	double percent;
 public:
 	static int counter;
+	static void sort(credit*);
 	int Getcreditnumber();
 	double Getsum();
 	double Getpercent();
