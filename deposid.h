@@ -1,9 +1,12 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <string>
 #include <iomanip>
+#include <exception>
+#include < string.h >
 #include <iostream>
 #include <fstream>
 #include "account.h"
+#include "credit.h"
 class deposit: protected account 
 {
 private:
@@ -23,12 +26,19 @@ public:
 	static void save_deposit(deposit*);
 	void To_String(ostream&);
 	static void load_deposit(deposit*);
+	static int samefio(deposit*);
+	static double right_int();
+	static void write_off(deposit*);
 	friend ostream& operator <<(ostream& out, deposit& obj);
 	static void display(deposit*);
 	
 	void operator+(double value)
 	{
 		this->sum += value;
+	}
+	void operator-(double value)
+	{
+		this->sum -= value;
 	}
 };
 

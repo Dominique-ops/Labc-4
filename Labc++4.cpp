@@ -5,8 +5,9 @@
 #include "account.h"
 #include "FIO.h"
 #include "deposid.h"
+#include <exception>
 #include "credit.h"
-
+//#include "stdexcept"
 using namespace std;
 
 
@@ -31,11 +32,13 @@ int main() {
         printf_s("- Информация о кредите            4 -\n");
         printf_s("- сортировка по сумме(депозит)    5 -\n");
         printf_s("- сортировка по сумме(кредит)     6 -\n");
-        //printf_s("- добавить к сумме(депозит)       7 -\n");
         printf_s("- Выход из программы              7 -\n");
+        printf_s("- выполнить платеж                8 -\n");
+        printf_s("- списать с депозита              9 -\n");
+        printf_s("- найти ФИО в депозите и кредите  6 -\n");
         printf_s("                                     \n");
         printf_s("- Введите номер функции: ");
-        while (scanf_s("%d", &item) != 1 || item > 8 || item < 1) {
+        while (scanf_s("%d", &item) != 1 || item > 11 || item < 1) {
             printf_s("- ошибка\n");
             printf_s("                          \n");
             printf_s("- Введите номер функции: ");
@@ -45,10 +48,23 @@ int main() {
         switch (item)
         {
         case 1:
-            deposit::add_deposit(mas1);
+            try {
+                deposit::add_deposit(mas1);
+            }
+            catch (length_error& e) {
+
+                cout << e.what() << endl;
+            }
             break;
         case 2:
-            credit::add_credit(mas2);
+
+            try {
+                credit::add_credit(mas2);
+            }
+            catch (length_error& e) {
+
+                cout << e.what() << endl;
+            }
             break;
         case 3:
             deposit::display(mas1);
@@ -67,10 +83,25 @@ int main() {
             credit::save_credit(mas2);
             exit(0);
             break;
-        }
 
+        case 8:
+            credit::loan_payment(mas2);
+            break;
+        case 9:
+            deposit::write_off(mas1);
+            break;
+        case 10:
+            if (deposit::samefio(mas1) == -1 || credit::samefio(mas2) == -1) {
+                cout << " отсутствуют" << endl;
+            
+            }
+            else {
+                cout << "id: " << deposit::samefio(mas1);
+            }
+            break;
+
+        }
     }
     return 0;
 }
-
 
